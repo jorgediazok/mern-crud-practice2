@@ -26,7 +26,7 @@ const AddTodos = () => {
           id="enter-todo"
           label="Enter ToDo"
           variant="outlined"
-          autofocus
+          autoFocus
           fullWidth
         />
         <Button
