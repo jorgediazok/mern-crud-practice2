@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const todos = require('./routes/todos');
 
 //Middlewares
 const app = express();
@@ -12,6 +13,8 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('Hello world');
 });
+
+app.use('/api', todos);
 
 //DB
 MONGO_URI = process.env.MONGODB_CONNECTION;

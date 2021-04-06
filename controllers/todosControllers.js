@@ -11,5 +11,10 @@ exports.createTodo = async (req, res) => {
     uid,
   });
 
-  todo.save();
+  try {
+    await todo.save();
+    res.status(201).json(todo);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
 };
