@@ -1,6 +1,15 @@
 const Todo = require('../models/todo');
 const Joi = require('joi');
 
+exports.getTodo = async (req, res) => {
+  try {
+    const todos = await Todo.find().sort({ date: -1 });
+    res.send(todos);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
 exports.createTodo = async (req, res) => {
   const schema = Joi.object({
     name: Joi.string().min(3).max(200).required(),
