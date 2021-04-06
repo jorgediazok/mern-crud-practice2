@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api', todos);
-app.use('/api/user', user);
+app.use('/api', user);
 
 //DB
 MONGO_URI = process.env.MONGODB_CONNECTION;
