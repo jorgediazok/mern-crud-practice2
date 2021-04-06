@@ -43,6 +43,10 @@ exports.createTodo = async (req, res) => {
 
 exports.deleteTodo = async (req, res) => {
   try {
+    const todo = await Todo.findById(req.params.id);
+
+    if (!todo) return res.status(404).send('Todo not found.');
+
     const deletedTodo = await Todo.findByIdAndDelete(req.params.id);
 
     res.send(deletedTodo);
@@ -52,6 +56,8 @@ exports.deleteTodo = async (req, res) => {
 };
 
 exports.updateTodo = async (req, res) => {
+  //Joi logic
+
   const schema = Joi.object({
     name: Joi.string().min(3).max(200).required(),
     author: Joi.string().min(3).max(30),
@@ -61,16 +67,17 @@ exports.updateTodo = async (req, res) => {
   });
 
   const { error } = schema.validate(req.body);
-
   if (error) return res.status(400).send(error.details[0].message);
 
-  const todo = await Todo.findById(req.params.id);
-
-  if (!todo) return res.status(404).send('Todo not found');
-
-  const { name, author, isComplete, date, uid } = req.body;
+  //
 
   try {
+    const todo = await Todo.findById(req.params.id);
+
+    if (!todo) return res.status(404).send('Todo not found');
+
+    const { name, author, isComplete, date, uid } = req.body;
+
     const updatedTodo = await Todo.findByIdAndUpdate(
       req.params.id,
       {
@@ -88,4 +95,20 @@ exports.updateTodo = async (req, res) => {
   }
 
   res.send(updatedTodo);
+};
+
+exports.patchTodo = async (req, res) => {
+  try {
+    const todo = await Todo.findById(req.params.id);
+
+    if (!todo) return res.status(404).send('Todo not found.');
+
+    const updatedTodo = await Todo.findByIdAndUpdate(req.params.id, {
+      isComplete: !todo.isComplete,
+    });
+
+    res.send(updatedTodo);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 };
