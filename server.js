@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const todos = require('./routes/todos');
+const user = require('./routes/user');
 
 //Middlewares
 const app = express();
@@ -15,6 +16,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api', todos);
+app.use('/api/user', user);
 
 //DB
 MONGO_URI = process.env.MONGODB_CONNECTION;
