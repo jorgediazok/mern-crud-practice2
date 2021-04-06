@@ -1,7 +1,14 @@
 import React from 'react';
+import AddTodos from './AddTodos';
+import ListTodos from './ListTodos';
 
 const Todos = () => {
-  return <div>Todos</div>;
+  return (
+    <div>
+      <AddTodos />
+      <ListTodos />
+    </div>
+  );
 };
 
 export default Todos;

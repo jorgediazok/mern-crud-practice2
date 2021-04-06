@@ -7,6 +7,10 @@ const useStyles = makeStyles({
   root: {
     flexGrow: 1,
   },
+  navbar: {
+    marginTop: '10px',
+    backgroundColor: '#191919',
+  },
   linkStyle: {
     textDecoration: 'none',
     color: '#fff',
@@ -24,7 +28,7 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar position="static" color="secondary">
+      <AppBar position="static" className={classes.navbar}>
         <Toolbar>
           <Typography variant="h4" className={classes.root}>
             <Link to="/" className={classes.linkStyle}>
@@ -39,6 +43,16 @@ const Navbar = () => {
             className={classes.authButton}
             color="inherit">
             Sign Out
+          </Button>
+          <Button color="inherit">
+            <Link className={classes.linkStyle} to="/signin">
+              Sign In
+            </Link>
+          </Button>
+          <Button color="inherit">
+            <Link className={classes.linkStyle} to="/signup">
+              Sign Up
+            </Link>
           </Button>
         </Toolbar>
       </AppBar>
