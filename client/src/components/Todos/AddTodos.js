@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import { Send } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/styles';
@@ -19,15 +19,35 @@ const useStyles = makeStyles({
 
 const AddTodos = () => {
   const classes = useStyles();
+
+  const [todo, setTodo] = useState({ name: '', isComplete: false });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(todo);
+    setTodo({
+      name: '',
+      isComplete: false,
+    });
+  };
+
   return (
     <>
-      <form noValidate autoComplete="off" className={classes.formStyle}>
+      <form
+        noValidate
+        autoComplete="off"
+        className={classes.formStyle}
+        onSubmit={handleSubmit}>
         <TextField
           id="enter-todo"
           label="Enter ToDo"
           variant="outlined"
           autoFocus
           fullWidth
+          value={todo.name}
+          onChange={(e) =>
+            setTodo({ ...todo, name: e.target.value, date: new Date() })
+          }
         />
         <Button
           color="primary"
