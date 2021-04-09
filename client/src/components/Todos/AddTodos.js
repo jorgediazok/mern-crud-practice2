@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { TextField, Button } from '@material-ui/core';
 import { Send } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/styles';
+import { addTodo } from '../../store/actions/todoActions';
 
 const useStyles = makeStyles({
   formStyle: {
@@ -19,11 +21,13 @@ const useStyles = makeStyles({
 
 const AddTodos = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const [todo, setTodo] = useState({ name: '', isComplete: false });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(addTodo(todo));
     console.log(todo);
     setTodo({
       name: '',
