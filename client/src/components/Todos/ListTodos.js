@@ -17,8 +17,8 @@ const useStyles = makeStyles({
 const ListTodos = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
-  console.log(state);
+  const todos = useSelector((state) => state.todos);
+  console.log(todos);
 
   useEffect(() => {
     dispatch(getTodos());
@@ -26,11 +26,13 @@ const ListTodos = () => {
 
   return (
     <div className={classes.todosStyle}>
-      <Typography variant="h5">theTodos</Typography>
-      <Todo />
-      <Todo />
-      <Todo />
-      <Todo />
+      <Typography variant="h5">
+        {todos.length > 0 ? 'todos' : 'no todos yet'}
+      </Typography>
+      {todos &&
+        todos.map((todo) => {
+          return <Todo todo={todo} key={todo._id} />;
+        })}
     </div>
   );
 };

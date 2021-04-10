@@ -2,6 +2,7 @@ import React from 'react';
 import { Typography, Button, ButtonGroup } from '@material-ui/core';
 import { Create, Delete, CheckCircle } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/styles';
+import moment from 'moment';
 
 const useStyles = makeStyles({
   todoStyle: {
@@ -15,28 +16,47 @@ const useStyles = makeStyles({
   grayStyle: {
     color: '#8f8f8f',
   },
+  isComplete: {
+    color: 'green',
+  },
+  checked: {
+    textDecoration: 'line-through',
+  },
 });
 
-const Todo = () => {
+const Todo = ({ todo }) => {
   const classes = useStyles();
 
   return (
     <>
       <div className={classes.todoStyle}>
         <div>
-          <Typography variant="subtitle1">Learn react</Typography>
-          <Typography variant="subtitle1" className={classes.grayStyle}>
+          {todo.isComplete ? (
+            <Typography variant="subtitle1" className={classes.checked}>
+              {todo.name}
+            </Typography>
+          ) : (
+            <Typography variant="subtitle1">{todo.name}</Typography>
+          )}
+          <Typography variant="body2" className={classes.grayStyle}>
             Author: JorgeDV
           </Typography>
-          <Typography variant="subtitle1" className={classes.grayStyle}>
-            Added:4 days ago
+          <Typography variant="body2" className={classes.grayStyle}>
+            Added: {moment(todo.data).fromNow()}
           </Typography>
         </div>
         <div>
           <ButtonGroup size="small" aria-label="outlined primary button group">
-            <Button>
-              <CheckCircle color="action" />
-            </Button>
+            {todo.isComplete ? (
+              <Button>
+                <CheckCircle color="action" className={classes.isComplete} />
+              </Button>
+            ) : (
+              <Button>
+                <CheckCircle color="action" />
+              </Button>
+            )}
+
             <Button>
               <Create color="primary" />
             </Button>

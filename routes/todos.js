@@ -4,7 +4,7 @@ const auth = require('../middleware/auth');
 
 const TodoControllers = require('../controllers/todosControllers');
 
-router.get('/', auth, TodoControllers.getTodo);
+router.get('/', TodoControllers.getTodo);
 router.post('/', TodoControllers.createTodo);
 router.delete('/:id', TodoControllers.deleteTodo);
 router.put('/:id', TodoControllers.updateTodo);
