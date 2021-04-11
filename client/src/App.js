@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 //Components
 import Navbar from './components/Navbar/Navbar';
@@ -20,6 +22,7 @@ function App() {
   return (
     <>
       <Router>
+        <ToastContainer />
         <Container maxWidth="md">
           <Navbar />
           <Container className={classes.contentStyle} maxWidth="sm">

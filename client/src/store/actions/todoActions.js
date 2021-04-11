@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { url } from '../../api/index';
+import { toast } from 'react-toastify';
 
 export const getTodos = () => {
   return (dispatch) => {
@@ -25,7 +26,12 @@ export const addTodo = (newTodo) => {
           todo,
         });
       })
-      .catch((error) => console.log(error.response));
+      .catch((error) => {
+        console.log(error.response);
+        toast.error(error.response?.data, {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
+      });
   };
 };
 
