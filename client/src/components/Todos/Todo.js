@@ -24,8 +24,17 @@ const useStyles = makeStyles({
   },
 });
 
-const Todo = ({ todo }) => {
+const Todo = ({ todo, setTodo }) => {
   const classes = useStyles();
+
+  const handleUpdateTodo = () => {
+    setTodo(todo);
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+  };
 
   return (
     <>
@@ -57,7 +66,7 @@ const Todo = ({ todo }) => {
               </Button>
             )}
 
-            <Button>
+            <Button onClick={() => handleUpdateTodo()}>
               <Create color="primary" />
             </Button>
             <Button>

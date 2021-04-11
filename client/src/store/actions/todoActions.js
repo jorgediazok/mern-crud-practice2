@@ -15,13 +15,27 @@ export const getTodos = () => {
   };
 };
 
-export const addTodo = (todo) => {
+export const addTodo = (newTodo) => {
   return (dispatch) => {
     axios
-      .post(`${url}`, todo)
+      .post(`${url}`, newTodo)
       .then((todo) => {
         dispatch({
           type: 'ADD_TODO',
+          todo,
+        });
+      })
+      .catch((error) => console.log(error.response));
+  };
+};
+
+export const updateTodo = (updatedTodo, id) => {
+  return (dispatch) => {
+    axios
+      .put(`${url}/${id}`, updatedTodo)
+      .then((todo) => {
+        dispatch({
+          type: 'UPDATE_TODO',
           todo,
         });
       })
