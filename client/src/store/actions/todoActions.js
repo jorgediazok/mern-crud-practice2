@@ -45,7 +45,12 @@ export const updateTodo = (updatedTodo, id) => {
           todo,
         });
       })
-      .catch((error) => console.log(error.response));
+      .catch((error) => {
+        console.log(error.response);
+        toast.error(error.response?.data, {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
+      });
   };
 };
 
@@ -59,6 +64,30 @@ export const checkTodo = (id) => {
           todo,
         });
       })
-      .catch((error) => console.log(error.response));
+      .catch((error) => {
+        console.log(error.response);
+        toast.error(error.response?.data, {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
+      });
+  };
+};
+
+export const deleteTodo = (id) => {
+  return (dispatch) => {
+    axios
+      .delete(`${url}/${id}`)
+      .then(() => {
+        dispatch({
+          type: 'DELETE_TODO',
+          id,
+        });
+      })
+      .catch((error) => {
+        console.log(error.response);
+        toast.error(error.response?.data, {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
+      });
   };
 };
