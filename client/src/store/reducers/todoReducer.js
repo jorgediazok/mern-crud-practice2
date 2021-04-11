@@ -19,6 +19,14 @@ const todoReducer = (state = [], action) => {
         todo._id === action.todo.data._id ? action.todo.data : todo
       );
 
+    case 'CHECK_TODO':
+      toast.success('Todo status was changed.', {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
+      return state.map((todo) =>
+        todo._id === action.todo.data._id ? action.todo.data : todo
+      );
+
     default:
       return state;
   }

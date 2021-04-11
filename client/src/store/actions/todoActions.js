@@ -48,3 +48,17 @@ export const updateTodo = (updatedTodo, id) => {
       .catch((error) => console.log(error.response));
   };
 };
+
+export const checkTodo = (id) => {
+  return (dispatch) => {
+    axios
+      .patch(`${url}/${id}`, {})
+      .then((todo) => {
+        dispatch({
+          type: 'CHECK_TODO',
+          todo,
+        });
+      })
+      .catch((error) => console.log(error.response));
+  };
+};
